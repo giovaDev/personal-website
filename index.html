@@ -1,0 +1,1627 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giovanni — Siti web e presenza online per attività locali</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --black: #111110;
+        --white: #ffffff;
+        --off: #f7f7f5;
+        --green: #1c6e48;
+        --green-bg: #eef7f2;
+        --muted: #888884;
+        --border: #e8e8e5;
+        --text: #2a2a28;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background: var(--white);
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+        padding: 0 5vw;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .logo {
+        font-size: 0.98rem;
+        font-weight: 800;
+        color: var(--black);
+        letter-spacing: -0.03em;
+      }
+      .logo span {
+        color: var(--green);
+      }
+      .nav-r {
+        display: flex;
+        align-items: center;
+        gap: 2.5rem;
+      }
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+      .nav-links a {
+        font-size: 0.8rem;
+        color: var(--muted);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--black);
+      }
+      .nav-btn {
+        background: var(--black);
+        color: #fff;
+        padding: 0.5rem 1.25rem;
+        border-radius: 100px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background 0.2s;
+      }
+      .nav-btn:hover {
+        background: var(--green);
+      }
+
+      .hero {
+        padding: calc(60px + 5rem) 5vw 4.5rem;
+        max-width: 1180px;
+        margin: 0 auto;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 2rem;
+        align-items: center;
+      }
+      .hero-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: var(--green-bg);
+        color: var(--green);
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.35rem 0.9rem;
+        border-radius: 100px;
+        margin-bottom: 1.2rem;
+      }
+      .pulse {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--green);
+        animation: p 2s infinite;
+      }
+      @keyframes p {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+
+      .hero-kicker {
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: var(--green);
+        margin-bottom: 0.65rem;
+      }
+      .hero h1 {
+        font-size: clamp(2.4rem, 5vw, 4.6rem);
+        font-weight: 800;
+        line-height: 1.05;
+        letter-spacing: -0.045em;
+        color: var(--black);
+        margin-bottom: 1.1rem;
+        max-width: 12ch;
+      }
+      .hero h1 span {
+        color: var(--green);
+      }
+      .hero-sub {
+        font-size: 1rem;
+        color: var(--muted);
+        max-width: 54ch;
+        line-height: 1.72;
+        font-weight: 400;
+        margin-bottom: 1.6rem;
+      }
+      .hero-loc {
+        color: var(--green);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 0.85rem;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 1.8rem;
+      }
+      .btn-primary {
+        background: var(--black);
+        color: #fff;
+        padding: 0.85rem 1.75rem;
+        border-radius: 100px;
+        font-size: 0.88rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition:
+          background 0.2s,
+          transform 0.15s;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .btn-primary:hover {
+        background: var(--green);
+        transform: translateY(-1px);
+      }
+      .btn-link {
+        font-size: 0.88rem;
+        font-weight: 500;
+        color: var(--muted);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        transition: color 0.2s;
+      }
+      .btn-link:hover {
+        color: var(--black);
+      }
+
+      .hero-proof {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        padding-top: 1.6rem;
+        border-top: 1px solid var(--border);
+      }
+      .proof-item {
+        min-width: 110px;
+      }
+      .proof-num {
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--black);
+        letter-spacing: -0.03em;
+        line-height: 1;
+      }
+      .proof-label {
+        font-size: 0.7rem;
+        color: var(--muted);
+        margin-top: 0.32rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .hero-card {
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        padding: 1.35rem;
+        background: linear-gradient(180deg, #fff 0%, #fafaf8 100%);
+        box-shadow: 0 20px 50px rgba(17, 17, 16, 0.05);
+      }
+      .hero-card-head {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+      .hero-avatar {
+        width: 200px;
+        height: 200px;
+        border-radius: 18px;
+        overflow: hidden;
+        flex-shrink: 0;
+        border: 1px solid var(--border);
+        background: var(--green-bg);
+      }
+      .hero-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .hero-card-name {
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: var(--black);
+        margin-bottom: 0.15rem;
+      }
+      .hero-card-role {
+        font-size: 0.84rem;
+        color: var(--muted);
+      }
+      .hero-card-text {
+        font-size: 0.9rem;
+        color: var(--text);
+        line-height: 1.7;
+        margin-bottom: 1rem;
+      }
+      .hero-card-list {
+        display: grid;
+        gap: 0.65rem;
+      }
+      .hero-card-list span {
+        font-size: 0.82rem;
+        color: var(--muted);
+        display: flex;
+        gap: 0.55rem;
+        align-items: flex-start;
+      }
+      .hero-card-list span::before {
+        content: "✓";
+        color: var(--green);
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+
+      .trust {
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 5vw;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .trust-label {
+        font-size: 0.75rem;
+        color: var(--muted);
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .trust-items {
+        display: flex;
+        gap: 1.4rem;
+        flex-wrap: wrap;
+      }
+      .trust-item {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .trust-item::before {
+        content: "✓";
+        color: var(--green);
+        font-size: 0.75rem;
+      }
+
+      .section {
+        padding: 5rem 5vw;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .sw {
+        padding: 5rem 5vw;
+      }
+      .eyebrow {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--green);
+        margin-bottom: 1rem;
+      }
+      .sh2 {
+        font-size: clamp(1.7rem, 3.2vw, 2.6rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1.13;
+        color: var(--black);
+        margin-bottom: 1rem;
+      }
+      .sbody {
+        font-size: 1rem;
+        color: var(--muted);
+        line-height: 1.72;
+        max-width: 56ch;
+        margin-bottom: 2.2rem;
+      }
+
+      .prob-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+      .pc {
+        background: #fff;
+        padding: 2rem 1.7rem;
+        transition: background 0.2s;
+      }
+      .pc:hover {
+        background: var(--green-bg);
+      }
+      .pc-n {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: var(--border);
+        letter-spacing: -0.04em;
+        line-height: 1;
+        margin-bottom: 1rem;
+      }
+      .pc-t {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--black);
+        margin-bottom: 0.45rem;
+      }
+      .pc-d {
+        font-size: 0.84rem;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .sv-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.1rem;
+      }
+      .sv {
+        padding: 1.8rem;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        transition:
+          border-color 0.2s,
+          transform 0.2s;
+        background: #fff;
+      }
+      .sv:hover {
+        border-color: #bbb;
+        transform: translateY(-2px);
+      }
+      .sv-t {
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: var(--black);
+        margin-bottom: 0.4rem;
+      }
+      .sv-d {
+        font-size: 0.82rem;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+      }
+      .step {
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: #fff;
+        padding: 1.6rem;
+      }
+      .step-dot {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background: var(--black);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.72rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+      }
+      .step-t {
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: var(--black);
+        margin-bottom: 0.4rem;
+      }
+      .step-d {
+        font-size: 0.82rem;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .port-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.15rem;
+      }
+      .pcard {
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+        background: #fff;
+      }
+      .pthumb {
+        height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        text-align: center;
+        padding: 1.5rem;
+      }
+      .pthumb.t1 {
+        background: var(--black);
+        color: rgba(255, 255, 255, 0.72);
+      }
+      .pthumb.t2 {
+        background: var(--green-bg);
+        color: var(--green);
+      }
+      .pinfo {
+        padding: 1.35rem;
+      }
+      .ptag {
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        margin-bottom: 0.35rem;
+        font-weight: 600;
+      }
+      .pname {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--black);
+        margin-bottom: 0.35rem;
+      }
+      .pnote {
+        font-size: 0.82rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .pricing-switch {
+        display: inline-flex;
+        gap: 0.5rem;
+        padding: 0.35rem;
+        background: var(--off);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+      }
+      .pricing-tab {
+        appearance: none;
+        border: none;
+        background: transparent;
+        color: var(--muted);
+        font: inherit;
+        font-size: 0.86rem;
+        font-weight: 700;
+        padding: 0.8rem 1rem;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .pricing-tab:hover {
+        color: var(--black);
+      }
+      .pricing-tab.is-active {
+        background: var(--white);
+        color: var(--black);
+        box-shadow:
+          0 1px 0 rgba(17, 17, 16, 0.04),
+          0 6px 18px rgba(17, 17, 16, 0.06);
+      }
+      .pricing-panel {
+        display: none;
+      }
+      .pricing-panel.is-active {
+        display: block;
+      }
+
+      .plans {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.15rem;
+      }
+      .plan {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 2rem;
+        position: relative;
+      }
+      .plan.hot {
+        border-color: var(--black);
+        border-width: 1.5px;
+      }
+      .plan-badge {
+        position: absolute;
+        top: -1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--black);
+        color: #fff;
+        font-size: 0.65rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 0.3rem 1rem;
+        border-radius: 100px;
+        white-space: nowrap;
+      }
+      .plan-name {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--green);
+        margin-bottom: 1rem;
+      }
+      .plan-p {
+        font-size: 2.6rem;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        color: var(--black);
+        line-height: 1;
+      }
+      .plan-cadence {
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin-bottom: 0.35rem;
+      }
+      .plan-note {
+        font-size: 0.75rem;
+        color: var(--muted);
+        padding-bottom: 1.25rem;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 1.25rem;
+      }
+      .feat {
+        font-size: 0.82rem;
+        color: var(--muted);
+        padding: 0.3rem 0;
+        display: flex;
+        gap: 0.6rem;
+      }
+      .feat::before {
+        content: "—";
+        color: var(--green);
+        flex-shrink: 0;
+      }
+      .plan-cta {
+        display: block;
+        text-align: center;
+        margin-top: 1.5rem;
+        padding: 0.8rem;
+        border-radius: 100px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+      .plan-cta.dark {
+        background: var(--black);
+        color: #fff;
+      }
+      .plan-cta.dark:hover {
+        background: var(--green);
+      }
+      .plan-cta.outline {
+        border: 1.5px solid var(--border);
+        color: var(--black);
+      }
+      .plan-cta.outline:hover {
+        border-color: var(--black);
+      }
+
+      .offer-section {
+        padding: 2.5rem 5vw 5rem;
+        background: var(--off);
+      }
+      .offer-wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .offer-card {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        padding: 2rem;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 2rem;
+        align-items: center;
+        box-shadow: 0 18px 40px rgba(17, 17, 16, 0.04);
+      }
+      .offer-title {
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: var(--black);
+        margin-bottom: 0.45rem;
+      }
+      .offer-text {
+        font-size: 0.92rem;
+        color: var(--muted);
+        line-height: 1.75;
+        max-width: 58ch;
+      }
+      .offer-side {
+        border-left: 1px solid var(--border);
+        padding-left: 2rem;
+      }
+      .offer-meta {
+        font-size: 0.74rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--green);
+        margin-bottom: 0.75rem;
+      }
+      .slot-row {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 0.75rem;
+      }
+      .slot-count {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--black);
+        line-height: 1;
+      }
+      .slot-label {
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+      .slot-dots {
+        display: flex;
+        gap: 0.45rem;
+        margin: 1rem 0 0.85rem;
+      }
+      .slot-dot {
+        width: 16px;
+        height: 16px;
+        border-radius: 5px;
+        background: var(--border);
+      }
+      .slot-dot.on {
+        background: var(--green);
+      }
+      .offer-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0.4rem;
+        background: var(--black);
+        color: #fff;
+        padding: 0.8rem 1.4rem;
+        border-radius: 100px;
+        font-size: 0.84rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: background 0.2s;
+      }
+      .offer-cta:hover {
+        background: var(--green);
+      }
+
+      .personal-note {
+        padding: 0 5vw 5rem;
+      }
+      .personal-wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .personal-card {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 2rem;
+        align-items: center;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        padding: 2rem;
+      }
+      .personal-copy h3 {
+        font-size: clamp(1.4rem, 2.6vw, 2rem);
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+        color: var(--black);
+        margin-bottom: 0.9rem;
+        font-weight: 800;
+      }
+      .personal-copy p {
+        font-size: 0.98rem;
+        line-height: 1.8;
+        color: var(--muted);
+        max-width: 50ch;
+      }
+      .personal-badge {
+        display: inline-block;
+        margin-bottom: 1rem;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--green);
+      }
+      .personal-figure {
+        display: flex;
+        justify-content: center;
+      }
+      .personal-figure img {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 18px;
+        border: 1px solid var(--border);
+        display: block;
+        background: #f3f3f1;
+      }
+
+      .cta-section {
+        text-align: center;
+        padding: 6rem 5vw;
+        border-top: 1px solid var(--border);
+      }
+      .cta-section h2 {
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        color: var(--black);
+        margin-bottom: 1rem;
+        line-height: 1.1;
+      }
+      .cta-section p {
+        font-size: 1rem;
+        color: var(--muted);
+        max-width: 48ch;
+        margin: 0 auto 2rem;
+        line-height: 1.75;
+      }
+      .cta-btns {
+        display: flex;
+        gap: 0.85rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .cta-meta {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+        margin-top: 2.5rem;
+        padding-top: 2.5rem;
+        border-top: 1px solid var(--border);
+      }
+      .cmeta-v {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--black);
+      }
+      .cmeta-l {
+        font-size: 0.72rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-top: 0.15rem;
+      }
+
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 1.5rem 5vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .foot-logo {
+        font-size: 0.9rem;
+        font-weight: 800;
+        color: var(--black);
+        letter-spacing: -0.02em;
+      }
+      .foot-logo span {
+        color: var(--green);
+      }
+      footer p {
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+      .foot-nav {
+        display: flex;
+        gap: 1.25rem;
+        flex-wrap: wrap;
+      }
+      .foot-nav a {
+        font-size: 0.75rem;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .foot-nav a:hover {
+        color: var(--black);
+      }
+
+      @media (max-width: 980px) {
+        .hero-grid,
+        .offer-card,
+        .personal-card {
+          grid-template-columns: 1fr;
+        }
+        .offer-side {
+          border-left: none;
+          border-top: 1px solid var(--border);
+          padding-left: 0;
+          padding-top: 1.5rem;
+        }
+      }
+      @media (max-width: 860px) {
+        nav {
+          padding: 0 1.25rem;
+        }
+        .nav-links {
+          display: none;
+        }
+        .hero {
+          padding: calc(60px + 4rem) 1.25rem 3.5rem;
+        }
+        .section,
+        .sw,
+        .offer-section,
+        .personal-note {
+          padding-left: 1.25rem;
+          padding-right: 1.25rem;
+        }
+        .section,
+        .sw {
+          padding-top: 4rem;
+          padding-bottom: 4rem;
+        }
+        .offer-section {
+          padding-top: 2rem;
+          padding-bottom: 4rem;
+        }
+        .personal-note {
+          padding-top: 0;
+          padding-bottom: 4rem;
+        }
+        .prob-grid,
+        .sv-grid,
+        .steps,
+        .plans {
+          grid-template-columns: 1fr;
+        }
+        .port-grid {
+          grid-template-columns: 1fr;
+        }
+        .pricing-switch {
+          display: grid;
+          grid-template-columns: 1fr;
+          width: 100%;
+        }
+        .pricing-tab {
+          width: 100%;
+          text-align: left;
+        }
+        footer {
+          flex-direction: column;
+          text-align: center;
+        }
+        .foot-nav {
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">Giovanni<span>.</span></div>
+      <div class="nav-r">
+        <ul class="nav-links">
+          <li><a href="#servizi">Servizi</a></li>
+          <li><a href="#metodo">Metodo</a></li>
+          <li><a href="#portfolio">Lavori</a></li>
+          <li><a href="#pricing">Prezzi</a></li>
+        </ul>
+        <a href="#contatti" class="nav-btn">Scrivimi →</a>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-pill">
+            <span class="pulse"></span> 5 slot locali a prezzo portfolio
+          </div>
+          <div class="hero-loc">📍 Bernareggio · Monza Brianza · Milano</div>
+          <div class="hero-kicker">Ciao, sono Giovanni.</div>
+          <h1>
+            Aiuto attività locali a <span>presentarsi meglio online.</span>
+          </h1>
+          <p class="hero-sub">
+            Realizzo siti web chiari e una presenza online ordinata per piccole
+            imprese, studi e attività locali. Nessuna agenzia, nessun passaggio
+            inutile: parli direttamente con me.
+          </p>
+          <div class="hero-actions">
+            <a href="#contatti" class="btn-primary"
+              >Richiedi mini audit gratuito →</a
+            >
+            <a href="#pricing" class="btn-link">Vedi i prezzi ↓</a>
+          </div>
+          <div class="hero-proof">
+            <div class="proof-item">
+              <div class="proof-num">10+</div>
+              <div class="proof-label">Anni nel software</div>
+            </div>
+            <div class="proof-item">
+              <div class="proof-num">200€</div>
+              <div class="proof-label">Prezzo portfolio</div>
+            </div>
+            <div class="proof-item">
+              <div class="proof-num">24h</div>
+              <div class="proof-label">Tempo di risposta</div>
+            </div>
+            <div class="proof-item">
+              <div class="proof-num">1</div>
+              <div class="proof-label">Referente diretto</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-head">
+            <div class="hero-avatar">
+              <img
+                src="./style_photo.png"
+                alt="Avatar illustrato di Giovanni"
+              />
+            </div>
+            <div>
+              <div class="hero-card-name">Giovanni</div>
+              <div class="hero-card-role">
+                Siti web e presenza online per attività locali
+              </div>
+            </div>
+          </div>
+          <div class="hero-card-text">
+            Porto alle attività locali un approccio semplice ma serio:
+            chiarezza, struttura pulita, contatto diretto e niente promesse
+            gonfiate.
+          </div>
+          <div class="hero-card-list">
+            <span>Ti dico anche quando basta fare meno</span>
+            <span>Proposta chiara prima di iniziare</span>
+            <span>Supporto post-lancio con perimetro definito</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trust">
+      <span class="trust-label">Con me hai:</span>
+      <div class="trust-items">
+        <span class="trust-item">Parli con chi realizza il lavoro</span>
+        <span class="trust-item">Prezzi chiari</span>
+        <span class="trust-item">Niente tecnicismi inutili</span>
+        <span class="trust-item">Approccio locale e diretto</span>
+        <span class="trust-item">Perimetro definito</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="eyebrow">Chi sono</div>
+      <h2 class="sh2">
+        Non vendo “digitale”.<br />Rendo più chiara la tua presenza online.
+      </h2>
+      <p class="sbody">
+        Lavoro da anni nello sviluppo software. Oggi applico lo stesso metodo
+        alle attività locali che vogliono presentarsi meglio online: sito
+        chiaro, contatti ordinati, messaggio leggibile, presenza più
+        professionale su Google e da telefono.
+      </p>
+
+      <div class="sv-grid">
+        <div class="sv">
+          <div class="sv-t">Ti seguo io, dall’inizio alla consegna</div>
+          <div class="sv-d">
+            Nessun commerciale, nessun rimbalzo tra figure diverse. Questo è
+            utile soprattutto se vuoi un rapporto semplice e veloce.
+          </div>
+        </div>
+        <div class="sv">
+          <div class="sv-t">Metodo da sviluppatore, non improvvisazione</div>
+          <div class="sv-d">
+            Ordine, struttura e chiarezza. Non ti ritrovi con un sito confuso,
+            fragile o impossibile da aggiornare.
+          </div>
+        </div>
+        <div class="sv">
+          <div class="sv-t">Ti dico cosa serve davvero</div>
+          <div class="sv-d">
+            Se per la tua attività basta una pagina fatta bene e una scheda
+            Google sistemata, te lo dico. Non cerco di gonfiare il preventivo.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="sw"
+      style="
+        background: var(--off);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      "
+    >
+      <div style="max-width: 1100px; margin: 0 auto">
+        <div class="eyebrow">Il problema</div>
+        <h2 class="sh2">
+          Molte attività lavorano bene.<br />Online però non lo mostrano.
+        </h2>
+        <p class="sbody">
+          Il problema spesso non è il servizio offerto. È come si presenta
+          online: poche informazioni, messaggio poco chiaro, sito vecchio o
+          assente, Google Business trascurato.
+        </p>
+
+        <div class="prob-grid">
+          <div class="pc">
+            <div class="pc-n">01</div>
+            <div class="pc-t">Prima impressione debole</div>
+            <div class="pc-d">
+              Se il sito manca o si vede male da telefono, chi ti cerca online
+              può pensare che anche l’attività sia poco curata.
+            </div>
+          </div>
+          <div class="pc">
+            <div class="pc-n">02</div>
+            <div class="pc-t">Contatti e servizi poco chiari</div>
+            <div class="pc-d">
+              Chi arriva deve capire subito cosa fai, dove sei e come
+              contattarti. Se deve interpretare, spesso esce.
+            </div>
+          </div>
+          <div class="pc">
+            <div class="pc-n">03</div>
+            <div class="pc-t">Google trascurato</div>
+            <div class="pc-d">
+              Foto, orari, descrizione, servizi e collegamenti fanno parte della
+              fiducia. Una scheda lasciata a metà comunica trascuratezza.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="servizi">
+      <div class="eyebrow">Servizi</div>
+      <h2 class="sh2">Quello che serve davvero<br />per partire bene.</h2>
+      <p class="sbody">
+        Non faccio mille cose confuse. Ti aiuto a partire bene online oppure a
+        sistemare quello che già hai, senza complicazioni inutili.
+      </p>
+
+      <div class="sv-grid">
+        <div class="sv">
+          <div class="sv-t">Nuovo sito essenziale</div>
+          <div class="sv-d">
+            Per chi oggi non ha ancora una presenza online seria e vuole partire
+            in modo semplice, rapido e chiaro.
+          </div>
+        </div>
+        <div class="sv">
+          <div class="sv-t">Aggiornamento sito esistente</div>
+          <div class="sv-d">
+            Per chi ha già un sito ma lo sente vecchio, poco chiaro, poco
+            aggiornato o non più rappresentativo.
+          </div>
+        </div>
+        <div class="sv">
+          <div class="sv-t">Presenza locale</div>
+          <div class="sv-d">
+            Revisione di Google Business, contatti, struttura minima e
+            visibilità di base per essere più credibile online.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="sw"
+      style="
+        background: var(--off);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      "
+      id="metodo"
+    >
+      <div style="max-width: 1100px; margin: 0 auto">
+        <div class="eyebrow">Metodo</div>
+        <h2 class="sh2">Processo semplice.<br />Rapporto diretto.</h2>
+        <p class="sbody">
+          Il punto non è complicarti il progetto. È capire cosa ti serve, farlo
+          bene e metterti online con aspettative chiare.
+        </p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-dot">01</div>
+            <div class="step-t">Mini audit</div>
+            <div class="step-d">
+              Guardo la situazione attuale e ti dico cosa non funziona, oppure
+              da dove partire se oggi non hai ancora un sito.
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-dot">02</div>
+            <div class="step-t">Proposta chiara</div>
+            <div class="step-d">
+              Ricevi una proposta con contenuto del lavoro, costo, tempi e
+              limiti del progetto.
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-dot">03</div>
+            <div class="step-t">Realizzazione</div>
+            <div class="step-d">
+              Mi mandi i materiali base, io organizzo il resto in modo pulito e
+              leggibile.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="portfolio">
+      <div class="eyebrow">Lavori e collaborazioni</div>
+      <h2 class="sh2">Alcuni progetti su cui ho lavorato.</h2>
+      <p class="sbody">
+        Qui separo volutamente lavori live, consulenze e progetti in sviluppo.
+        Meglio essere chiari che sembrare più grandi di quello che serve.
+      </p>
+
+      <div class="port-grid">
+        <div class="pcard">
+          <div class="pthumb t1">
+            TWO — Tuscan Wedding Officiant<br />
+            <span style="font-size: 0.72rem; opacity: 0.4; font-weight: 400"
+              >tuscanweddingofficiant.com</span
+            >
+          </div>
+          <div class="pinfo">
+            <div class="ptag">Live · consulenza strategica · audit</div>
+            <div class="pname">Tuscan Wedding Officiant</div>
+            <div class="pnote">
+              Analisi del sito e della presenza digitale, con piano operativo di
+              miglioramento su struttura, messaggio e posizionamento.
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="pthumb" style="background: #fff5f0; color: #8b3a1a">
+            Ristorante Greco Esperides<br />
+            <span style="font-size: 0.72rem; opacity: 0.5; font-weight: 400"
+              >Milano · Loreto</span
+            >
+          </div>
+          <div class="pinfo">
+            <div class="ptag">Progetto locale · sito · presenza online</div>
+            <div class="pname">Ristorante Greco Esperides</div>
+            <div class="pnote">
+              Impostazione della presenza digitale locale con sito, informazioni
+              essenziali e base più ordinata per il contatto con i clienti.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="pricing">
+      <div class="eyebrow">Prezzi</div>
+      <h2 class="sh2">Partiamo da dove sei oggi.</h2>
+      <p class="sbody">
+        Se non hai ancora un sito, puoi partire con una soluzione semplice e
+        veloce. Se invece ne hai già uno, ha più senso ragionare su
+        aggiornamento, manutenzione o refresh.
+      </p>
+
+      <div class="pricing-switch" role="tablist" aria-label="Tipologia offerte">
+        <button
+          class="pricing-tab is-active"
+          type="button"
+          role="tab"
+          aria-selected="true"
+          aria-controls="pricing-panel-new"
+          id="pricing-tab-new"
+        >
+          Non hai ancora un sito?
+        </button>
+        <button
+          class="pricing-tab"
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="pricing-panel-existing"
+          id="pricing-tab-existing"
+        >
+          Hai già un sito?
+        </button>
+      </div>
+
+      <div
+        class="pricing-panel is-active"
+        id="pricing-panel-new"
+        role="tabpanel"
+        aria-labelledby="pricing-tab-new"
+      >
+        <div class="plans">
+          <div class="plan hot" style="display: flex; flex-direction: column">
+            <div class="plan-badge">Ideale per iniziare</div>
+            <div class="plan-name">Starter</div>
+
+            <div
+              style="
+                font-size: 0.95rem;
+                color: var(--muted);
+                text-decoration: line-through;
+                margin-bottom: 0.2rem;
+              "
+            >
+              390€
+            </div>
+            <div class="plan-p">200€</div>
+
+            <div class="plan-cadence">prezzo lancio</div>
+            <div class="plan-note">
+              valido per alcune attività locali selezionate
+            </div>
+
+            <div class="feat">Sito one-page mobile-first</div>
+            <div class="feat">Struttura chiara dei contenuti</div>
+            <div class="feat">WhatsApp + form contatto</div>
+            <div class="feat">Base SEO tecnica</div>
+            <div class="feat">Consegna rapida</div>
+
+            <a href="#contatti" class="plan-cta dark" style="margin-top: auto"
+              >Parti da qui →</a
+            >
+          </div>
+
+          <div class="plan" style="display: flex; flex-direction: column">
+            <div class="plan-name">Presenza Locale</div>
+            <div class="plan-p">690€</div>
+            <div class="plan-cadence">una tantum</div>
+            <div class="plan-note">
+              Per chi vuole un sito più completo e una presenza più ordinata.
+            </div>
+
+            <div class="feat">Sito multi-pagina</div>
+            <div class="feat">Revisione Google Business</div>
+            <div class="feat">Contatti e servizi più completi</div>
+            <div class="feat">Supporto al lancio</div>
+            <div class="feat">Impostazione più solida nel tempo</div>
+
+            <a
+              href="#contatti"
+              class="plan-cta outline"
+              style="margin-top: auto"
+              >Valutiamo se ti serve →</a
+            >
+          </div>
+
+          <div class="plan" style="display: flex; flex-direction: column">
+            <div class="plan-name">Custom</div>
+            <div class="plan-p" style="font-size: 2rem; line-height: 1.2">
+              Su<br />misura
+            </div>
+            <div class="plan-cadence">preventivo</div>
+            <div class="plan-note">
+              Solo per esigenze reali: niente upsell forzato.
+            </div>
+
+            <div class="feat">E-commerce</div>
+            <div class="feat">Prenotazioni / aree riservate</div>
+            <div class="feat">Applicazioni web</div>
+            <div class="feat">Automazioni dedicate</div>
+            <div class="feat">Analisi tecnica iniziale</div>
+
+            <a
+              href="#contatti"
+              class="plan-cta outline"
+              style="margin-top: auto"
+              >Parliamone →</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="pricing-panel"
+        id="pricing-panel-existing"
+        role="tabpanel"
+        aria-labelledby="pricing-tab-existing"
+      >
+        <div class="plans">
+          <div class="plan hot" style="display: flex; flex-direction: column">
+            <div class="plan-badge">Più richiesto</div>
+            <div class="plan-name">Aggiornamento</div>
+            <div class="plan-p">150€</div>
+            <div class="plan-cadence">da</div>
+            <div class="plan-note">
+              Per siti già esistenti che hanno bisogno di modifiche, contenuti
+              aggiornati o sistemazioni mirate.
+            </div>
+
+            <div class="feat">Aggiornamento testi e immagini</div>
+            <div class="feat">Contatti, orari, servizi e pagine</div>
+            <div class="feat">Piccole correzioni layout</div>
+            <div class="feat">Intervento rapido e definito</div>
+
+            <a href="#contatti" class="plan-cta dark" style="margin-top: auto"
+              >Chiedi una valutazione →</a
+            >
+          </div>
+
+          <div class="plan" style="display: flex; flex-direction: column">
+            <div class="plan-name">Manutenzione</div>
+            <div class="plan-p">50€</div>
+            <div class="plan-cadence">al mese</div>
+            <div class="plan-note">
+              Per mantenere il sito funzionante nel tempo. Non include
+              contenuti, creatività, SEO o nuove funzionalità.
+            </div>
+
+            <div class="feat">Verifica periodica operatività sito</div>
+            <div class="feat">
+              Controllo moduli contatto e funzioni essenziali
+            </div>
+            <div class="feat">Gestione piccoli problemi tecnici</div>
+            <div class="feat">Supporto di primo livello</div>
+            <div class="feat">Tempi di risposta definiti</div>
+
+            <a
+              href="#contatti"
+              class="plan-cta outline"
+              style="margin-top: auto"
+              >Vediamo se ti serve →</a
+            >
+          </div>
+
+          <div class="plan" style="display: flex; flex-direction: column">
+            <div class="plan-name">Custom</div>
+            <div class="plan-p" style="font-size: 2rem; line-height: 1.2">
+              Su<br />misura
+            </div>
+            <div class="plan-cadence">preventivo</div>
+            <div class="plan-note">
+              Per esigenze particolari su siti già esistenti: modifiche più
+              ampie, funzionalità dedicate o interventi non standard.
+            </div>
+
+            <div class="feat">Interventi personalizzati</div>
+            <div class="feat">Funzionalità o sezioni dedicate</div>
+            <div class="feat">Analisi del sito attuale</div>
+            <div class="feat">Preventivo chiaro prima di iniziare</div>
+
+            <a
+              href="#contatti"
+              class="plan-cta outline"
+              style="margin-top: auto"
+              >Parliamone →</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="offer-section">
+      <div class="offer-wrap">
+        <div class="offer-card">
+          <div>
+            <div class="eyebrow" style="margin-bottom: 0.75rem">
+              Collaborazioni locali
+            </div>
+            <div class="offer-title">
+              Sto aprendo 5 collaborazioni locali a prezzo portfolio.
+            </div>
+            <div class="offer-text">
+              Per alcuni progetti locali ben definiti, il piano Starter è
+              attualmente disponibile a
+              <strong style="color: var(--black)">200€ invece di 390€</strong>.
+              Il lavoro resta lo stesso: prezzo ridotto, non qualità ridotta.
+              L’obiettivo è costruire un portfolio territoriale solido.
+            </div>
+          </div>
+
+          <div class="offer-side">
+            <div class="offer-meta">Disponibilità attuale</div>
+            <div class="slot-row">
+              <div class="slot-count">2</div>
+              <div class="slot-label">
+                posti ancora disponibili<br />su 5 collaborazioni iniziali
+              </div>
+            </div>
+            <div class="slot-dots">
+              <div class="slot-dot on"></div>
+              <div class="slot-dot on"></div>
+              <div class="slot-dot off"></div>
+              <div class="slot-dot off"></div>
+              <div class="slot-dot off"></div>
+            </div>
+            <a href="#contatti" class="offer-cta">Verifica se rientri →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="personal-note">
+      <div class="personal-wrap">
+        <div class="personal-card">
+          <div class="personal-copy">
+            <div class="personal-badge">Una nota personale</div>
+            <h3>Dietro al lavoro c’è una persona reale.</h3>
+            <p>
+              Lavoro nel software da anni, ma preferisco rapporti semplici,
+              diretti e concreti. Niente linguaggio gonfiato, niente
+              impostazione da agenzia impersonale: se mi scrivi, parli con me.
+            </p>
+          </div>
+          <div class="personal-figure">
+            <img
+              src="./real-person.jpg"
+              alt="Versione illustrata di Giovanni"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-section" id="contatti">
+      <div class="eyebrow" style="display: flex; justify-content: center">
+        Contatti
+      </div>
+      <h2>Scrivimi e vediamo<br />se ha senso lavorare insieme.</h2>
+      <p>
+        Se hai già un sito, ti dico cosa non funziona. Se parti da zero, ti dico
+        qual è il minimo sensato per presentarti bene online. Nessun impegno,
+        nessuna vendita forzata.
+      </p>
+
+      <div class="cta-btns">
+        <a href="https://wa.me/39XXXXXXXXXX" class="btn-primary"
+          >Scrivimi su WhatsApp →</a
+        >
+        <a href="mailto:tuaemail@dominio.it" class="btn-link"
+          >Invia una mail →</a
+        >
+        <a
+          href="https://www.linkedin.com/in/giovanni-gio-f-660731115/"
+          target="_blank"
+          class="btn-link"
+          style="display: inline-flex; align-items: center; gap: 0.4rem"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            style="flex-shrink: 0"
+          >
+            <path
+              d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+            />
+            <rect x="2" y="9" width="4" height="12" />
+            <circle cx="4" cy="4" r="2" />
+          </svg>
+          LinkedIn →
+        </a>
+      </div>
+
+      <div class="cta-meta">
+        <div>
+          <div class="cmeta-v">Brianza · Milano</div>
+          <div class="cmeta-l">Zona operativa</div>
+        </div>
+        <div>
+          <div class="cmeta-v">Italiano · English</div>
+          <div class="cmeta-l">Lingue</div>
+        </div>
+        <div>
+          <div class="cmeta-v">Entro 24h</div>
+          <div class="cmeta-l">Risposta</div>
+        </div>
+        <div>
+          <div class="cmeta-v">Remote · In presenza</div>
+          <div class="cmeta-l">Modalità</div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="foot-logo">Giovanni<span>.</span></div>
+      <p>© 2026 · Brianza, Italia</p>
+      <nav class="foot-nav">
+        <a href="#servizi">Servizi</a>
+        <a href="#metodo">Metodo</a>
+        <a href="#portfolio">Lavori</a>
+        <a href="#pricing">Prezzi</a>
+        <a href="#contatti">Contatti</a>
+        <a
+          href="https://www.linkedin.com/in/giovanni-gio-f-660731115/"
+          target="_blank"
+          >LinkedIn</a
+        >
+      </nav>
+    </footer>
+
+    <script>
+      const pricingTabs = document.querySelectorAll(".pricing-tab");
+      const pricingPanels = document.querySelectorAll(".pricing-panel");
+
+      pricingTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const targetId = tab.getAttribute("aria-controls");
+
+          pricingTabs.forEach((t) => {
+            t.classList.remove("is-active");
+            t.setAttribute("aria-selected", "false");
+          });
+
+          pricingPanels.forEach((panel) => {
+            panel.classList.remove("is-active");
+          });
+
+          tab.classList.add("is-active");
+          tab.setAttribute("aria-selected", "true");
+
+          const targetPanel = document.getElementById(targetId);
+          targetPanel.classList.add("is-active");
+        });
+      });
+    </script>
+  </body>
+</html>
