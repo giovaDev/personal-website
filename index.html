@@ -519,7 +519,8 @@
         line-height: 1.6;
       }
 
-      .pricing-switch {
+      .pricing-switch,
+      .portfolio-mobile-tabs {
         display: inline-flex;
         gap: 0.5rem;
         padding: 0.35rem;
@@ -529,7 +530,8 @@
         margin-bottom: 1.5rem;
         flex-wrap: wrap;
       }
-      .pricing-tab {
+      .pricing-tab,
+      .portfolio-tab {
         appearance: none;
         border: none;
         background: transparent;
@@ -542,10 +544,12 @@
         cursor: pointer;
         transition: all 0.2s ease;
       }
-      .pricing-tab:hover {
+      .pricing-tab:hover,
+      .portfolio-tab:hover {
         color: var(--black);
       }
-      .pricing-tab.is-active {
+      .pricing-tab.is-active,
+      .portfolio-tab.is-active {
         background: var(--white);
         color: var(--black);
         box-shadow:
@@ -556,6 +560,13 @@
         display: none;
       }
       .pricing-panel.is-active {
+        display: block;
+      }
+
+      .portfolio-mobile-tabs {
+        display: none;
+      }
+      .portfolio-panel {
         display: block;
       }
 
@@ -884,6 +895,58 @@
         color: var(--black);
       }
 
+      .mobile-carousel {
+        position: relative;
+      }
+      .carousel-arrow {
+        display: none;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 5;
+        width: 42px;
+        height: 42px;
+        border: 1px solid rgba(17, 17, 16, 0.08);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.82);
+        backdrop-filter: blur(8px);
+        color: var(--black);
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition:
+          opacity 0.2s ease,
+          background 0.2s ease;
+        box-shadow: 0 8px 20px rgba(17, 17, 16, 0.08);
+      }
+      .carousel-arrow:hover {
+        background: rgba(255, 255, 255, 0.96);
+      }
+      .carousel-arrow.left {
+        left: 0.3rem;
+      }
+      .carousel-arrow.right {
+        right: 0.3rem;
+      }
+      .carousel-arrow svg {
+        width: 18px;
+        height: 18px;
+      }
+      .carousel-arrow.is-disabled {
+        opacity: 0.3;
+        pointer-events: none;
+      }
+      .carousel-counter {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+        margin-top: 0.9rem;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
       @media (max-width: 980px) {
         .hero-grid,
         .offer-card,
@@ -898,6 +961,9 @@
         }
       }
       @media (max-width: 860px) {
+        .pthumb.t1 span, .pthumb.t2 span, .pthumb span{
+          display: none;
+        }
         nav {
           padding: 0 1.25rem;
         }
@@ -928,22 +994,28 @@
           padding-bottom: 4rem;
         }
         .prob-grid,
-        .sv-grid,
-        .steps,
-        .plans {
+        .sv-grid {
           grid-template-columns: 1fr;
         }
-        .port-grid {
-          grid-template-columns: 1fr;
-        }
-        .pricing-switch {
+        .pricing-switch,
+        .portfolio-mobile-tabs {
           display: grid;
           grid-template-columns: 1fr;
           width: 100%;
         }
-        .pricing-tab {
+        .pricing-tab,
+        .portfolio-tab {
           width: 100%;
           text-align: left;
+        }
+        .portfolio-mobile-tabs {
+          display: grid;
+        }
+        .portfolio-panel {
+          display: none;
+        }
+        .portfolio-panel.is-active {
+          display: block;
         }
         footer {
           flex-direction: column;
@@ -951,6 +1023,44 @@
         }
         .foot-nav {
           justify-content: center;
+        }
+
+        .mobile-carousel .carousel-arrow {
+          display: inline-flex;
+        }
+        .mobile-carousel .carousel-counter {
+          display: flex;
+        }
+
+        .mobile-carousel .steps,
+        .mobile-carousel .plans,
+        .mobile-carousel .port-grid {
+          display: flex;
+          overflow-x: auto;
+          gap: 0.9rem;
+          padding: 0 2.55rem 0.35rem 0.1rem;
+          scroll-snap-type: x mandatory;
+          scroll-behavior: smooth;
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .mobile-carousel .steps::-webkit-scrollbar,
+        .mobile-carousel .plans::-webkit-scrollbar,
+        .mobile-carousel .port-grid::-webkit-scrollbar {
+          display: none;
+        }
+        .mobile-carousel .step,
+        .mobile-carousel .plan,
+        .mobile-carousel .pcard {
+          flex: 0 0 86%;
+          min-width: 86%;
+          scroll-snap-align: start;
+        }
+        .mobile-carousel .steps::after,
+        .mobile-carousel .plans::after,
+        .mobile-carousel .port-grid::after {
+          content: "";
+          flex: 0 0 6px;
         }
       }
     </style>
@@ -1057,10 +1167,10 @@
         Non vendo “digitale”.<br />Rendo più chiara la tua presenza online.
       </h2>
       <p class="sbody">
-        Lavoro da anni nello sviluppo software. Oggi applico lo stesso metodo
-        alle attività locali che vogliono presentarsi meglio online: sito
-        chiaro, contatti ordinati, messaggio leggibile, presenza più
-        professionale su Google e da telefono.
+        Lavoro da anni nello sviluppo software. Oggi applico alle attività
+        locali che vogliono presentarsi meglio online: sito chiaro, contatti
+        ordinati, messaggio leggibile, presenza più professionale su Google e da
+        telefono.
       </p>
 
       <div class="sv-grid">
@@ -1186,209 +1296,412 @@
           bene e metterti online con aspettative chiare.
         </p>
 
-        <div class="steps">
-          <div class="step">
-            <div class="step-dot">01</div>
-            <div class="step-t">Mini audit</div>
-            <div class="step-d">
-              Guardo la situazione attuale e ti dico cosa non funziona, oppure
-              da dove partire se oggi non hai ancora un sito.
+        <div class="mobile-carousel" data-carousel="method">
+          <button
+            class="carousel-arrow left"
+            type="button"
+            aria-label="Scorri indietro"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M15 18l-6-6 6-6"></path>
+            </svg>
+          </button>
+
+          <div class="steps">
+            <div class="step">
+              <div class="step-dot">01</div>
+              <div class="step-t">Mini audit</div>
+              <div class="step-d">
+                Guardo la situazione attuale e ti dico cosa non funziona, oppure
+                da dove partire se oggi non hai ancora un sito.
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-dot">02</div>
+              <div class="step-t">Proposta chiara</div>
+              <div class="step-d">
+                Ricevi una proposta con contenuto del lavoro, costo, tempi e
+                limiti del progetto.
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-dot">03</div>
+              <div class="step-t">Realizzazione</div>
+              <div class="step-d">
+                Mi mandi i materiali base, io organizzo il resto in modo pulito
+                e leggibile.
+              </div>
             </div>
           </div>
-          <div class="step">
-            <div class="step-dot">02</div>
-            <div class="step-t">Proposta chiara</div>
-            <div class="step-d">
-              Ricevi una proposta con contenuto del lavoro, costo, tempi e
-              limiti del progetto.
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-dot">03</div>
-            <div class="step-t">Realizzazione</div>
-            <div class="step-d">
-              Mi mandi i materiali base, io organizzo il resto in modo pulito e
-              leggibile.
-            </div>
-          </div>
+
+          <button
+            class="carousel-arrow right"
+            type="button"
+            aria-label="Scorri avanti"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </button>
         </div>
       </div>
     </div>
 
-     <div class="section" id="portfolio">
+    <div class="section" id="portfolio">
       <div class="eyebrow">Lavori e collaborazioni</div>
       <h2 class="sh2">Alcuni progetti su cui ho lavorato.</h2>
       <p class="sbody">
-        Qui separo volutamente lavori live, consulenze e progetti in sviluppo.
-        Meglio essere chiari che sembrare più grandi di quello che serve.
+        Distinguo i progetti già online da quelli ancora Coming Soon, così chi
+        visita il sito capisce subito cosa è già live e cosa sto esplorando.
       </p>
 
-      <div class="port-grid">
-        <div class="pcard">
-          <div class="pthumb t1">
-            TWO — Tuscan Wedding Officiant<br />
-            <span style="font-size: 0.72rem; opacity: 0.4; font-weight: 400"
-              >tuscanweddingofficiant.com</span
-            >
-          </div>
-          <div class="pinfo">
-            <div class="ptag">Live · consulenza strategica · audit</div>
-            <div class="pname">Tuscan Wedding Officiant</div>
-            <div class="pnote">
-              Analisi del sito e della presenza digitale, con piano operativo di
-              miglioramento su struttura, messaggio e posizionamento.
-            </div>
-          </div>
-        </div>
+      <div
+        class="portfolio-mobile-tabs"
+        role="tablist"
+        aria-label="Tipologia progetti"
+      >
+        <button
+          class="portfolio-tab is-active"
+          type="button"
+          role="tab"
+          aria-selected="true"
+          aria-controls="portfolio-panel-online"
+          id="portfolio-tab-online"
+        >
+          Online
+        </button>
+        <button
+          class="portfolio-tab"
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="portfolio-panel-design"
+          id="portfolio-tab-design"
+        >
+          Coming soon
+        </button>
+      </div>
 
-        <div class="pcard">
-          <div class="pthumb" style="background: #fff5f0; color: #8b3a1a">
-            Ristorante Greco Esperides<br />
-            <span style="font-size: 0.72rem; opacity: 0.5; font-weight: 400"
-              >Milano · Loreto</span
-            >
-          </div>
-          <div class="pinfo">
-            <div class="ptag">Progetto locale · sito · presenza online</div>
-            <div class="pname">Ristorante Greco Esperides</div>
-            <div class="pnote">
-              Impostazione della presenza digitale locale con sito, informazioni
-              essenziali e base più ordinata per il contatto con i clienti.
-            </div>
-          </div>
-        </div>
-
-        <div class="pcard">
-          <div class="pthumb" style="background: #f0f4ff; color: #2d4da0">
-            OneMind Consulting<br />
-            <span style="font-size: 0.72rem; opacity: 0.5; font-weight: 400"
-              >Milano</span
-            >
-          </div>
-          <div class="pinfo">
-            <div class="ptag">Sito professionale · identità digitale</div>
-            <div class="pname">OneMind Consulting</div>
-            <div class="pnote">
-              Struttura del sito e impostazione del messaggio per una presenza
-              più coerente e professionale.
-            </div>
-          </div>
-        </div>
-
-        <div class="pcard" style="position: relative">
-          <div
-            style="
-              position: absolute;
-              top: 0.75rem;
-              right: 0.75rem;
-              background: rgba(0, 0, 0, 0.65);
-              color: #fff;
-              font-size: 0.62rem;
-              font-weight: 700;
-              letter-spacing: 0.1em;
-              text-transform: uppercase;
-              padding: 0.25rem 0.65rem;
-              border-radius: 100px;
-              display: flex;
-              align-items: center;
-              gap: 0.35rem;
-              z-index: 2;
-              backdrop-filter: blur(4px);
-            "
+      <div
+        class="portfolio-panel is-active"
+        id="portfolio-panel-online"
+        role="tabpanel"
+        aria-labelledby="portfolio-tab-online"
+      >
+        <div
+          class="mobile-carousel"
+          data-carousel="projects-online"
+          data-counter="true"
+        >
+          <button
+            class="carousel-arrow left"
+            type="button"
+            aria-label="Progetto precedente"
           >
-            <span
-              style="
-                width: 6px;
-                height: 6px;
-                border-radius: 50%;
-                background: #f5c518;
-                animation: p 2s infinite;
-                display: inline-block;
-              "
-            ></span
-            >Coming soon
-          </div>
-          <div class="pthumb t2" style="filter: grayscale(0.2)">
-            Gestionale 2D<br />
-            <span style="font-size: 0.72rem; opacity: 0.5; font-weight: 500"
-              >SaaS per PMI</span
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             >
-          </div>
-          <div class="pinfo">
-            <div class="ptag">Prodotto software · applicazione web</div>
-            <div class="pname">Gestionale magazzino 2D</div>
-            <div class="pnote">
-              Lo mostro perché rappresenta il mio lato tecnico. Non è un
-              servizio standard per tutti, ma una prova del mio profilo da
-              sviluppatore.
-            </div>
-          </div>
-        </div>
-        <div class="pcard" style="position: relative">
-          <div
-            style="
-              position: absolute;
-              top: 0.75rem;
-              right: 0.75rem;
-              background: rgba(0, 0, 0, 0.65);
-              color: #fff;
-              font-size: 0.62rem;
-              font-weight: 700;
-              letter-spacing: 0.1em;
-              text-transform: uppercase;
-              padding: 0.25rem 0.65rem;
-              border-radius: 100px;
-              display: flex;
-              align-items: center;
-              gap: 0.35rem;
-              z-index: 2;
-              backdrop-filter: blur(4px);
-            "
-          >
-            <span
-              style="
-                width: 6px;
-                height: 6px;
-                border-radius: 50%;
-                background: #f5c518;
-                animation: p 2s infinite;
-                display: inline-block;
-              "
-            ></span
-            >Coming soon
-          </div>
-          <div class="pthumb" style="background: #fff5f0; color: #8b3a1a">
-            Narravitae<br />
-            <span style="font-size: 0.72rem; opacity: 0.5; font-weight: 500"
-              >Sito web</span
-            >
-          </div>
-          <div class="pinfo">
-            <div class="ptag">Sito professionale · identità digitale</div>
-            <div class="pname">Narravitae</div>
-            <div class="pnote">
-              Struttura del sito e impostazione del messaggio per una presenza
-              più coerente e professionale.
-            </div>
-          </div>
-        </div>
+              <path d="M15 18l-6-6 6-6"></path>
+            </svg>
+          </button>
 
-        <!-- <div class="port-coming">
-          <div class="eyebrow" style="display: flex; justify-content: center">
-            Il prossimo progetto potrebbe essere il tuo
+          <div class="port-grid">
+            <div class="pcard">
+              <div class="pthumb t1">
+                TWO — Tuscan Wedding Officiant<br />
+                <span style="font-size: 0.72rem; opacity: 0.4; font-weight: 400"
+                  >tuscanweddingofficiant.com</span
+                >
+              </div>
+              <div class="pinfo">
+                <div class="ptag">Live · consulenza strategica · audit</div>
+                <div class="pname">Tuscan Wedding Officiant</div>
+                <div class="pnote">
+                  Analisi del sito e della presenza digitale, con piano
+                  operativo di miglioramento su struttura, messaggio e
+                  posizionamento.
+                </div>
+              </div>
+            </div>
+
+            <div class="pcard">
+              <div class="pthumb" style="background: #fff5f0; color: #8b3a1a">
+                Ristorante Greco Esperides<br />
+                <span style="font-size: 0.72rem; opacity: 0.5; font-weight: 400"
+                  >Milano · Loreto</span
+                >
+              </div>
+              <div class="pinfo">
+                <div class="ptag">Progetto locale · sito · presenza online</div>
+                <div class="pname">Ristorante Greco Esperides</div>
+                <div class="pnote">
+                  Impostazione della presenza digitale locale con sito,
+                  informazioni essenziali e base più ordinata per il contatto
+                  con i clienti.
+                </div>
+              </div>
+            </div>
+
+            <div class="pcard">
+              <div class="pthumb" style="background: #f0f4ff; color: #2d4da0">
+                OneMind Consulting<br />
+                <span style="font-size: 0.72rem; opacity: 0.5; font-weight: 400"
+                  >Milano</span
+                >
+              </div>
+              <div class="pinfo">
+                <div class="ptag">Sito professionale · identità digitale</div>
+                <div class="pname">OneMind Consulting</div>
+                <div class="pnote">
+                  Struttura del sito e impostazione del messaggio per una
+                  presenza più coerente e professionale.
+                </div>
+              </div>
+            </div>
           </div>
-          <p>
-            In questa fase sto aprendo collaborazioni con alcune attività locali
-            per costruire un portfolio territoriale solido. Se il tuo progetto è
-            adatto, te lo dico in modo diretto.
-          </p>
-          <a
-            href="#contatti"
-            class="btn-primary"
-            style="display: inline-flex; margin: 0 auto"
-            >Richiedi mini audit →</a
+
+          <button
+            class="carousel-arrow right"
+            type="button"
+            aria-label="Progetto successivo"
           >
-        </div> -->
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </button>
+
+          <div class="carousel-counter">
+            <span class="current">1</span> / <span class="total">3</span>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="portfolio-panel"
+        id="portfolio-panel-design"
+        role="tabpanel"
+        aria-labelledby="portfolio-tab-design"
+      >
+        <div
+          class="mobile-carousel"
+          data-carousel="projects-design"
+          data-counter="true"
+        >
+          <button
+            class="carousel-arrow left"
+            type="button"
+            aria-label="Progetto precedente"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M15 18l-6-6 6-6"></path>
+            </svg>
+          </button>
+
+          <div class="port-grid">
+            <div class="pcard" style="position: relative">
+              <div
+                style="
+                  position: absolute;
+                  top: 0.75rem;
+                  right: 0.75rem;
+                  background: rgba(0, 0, 0, 0.65);
+                  color: #fff;
+                  font-size: 0.62rem;
+                  font-weight: 700;
+                  letter-spacing: 0.1em;
+                  text-transform: uppercase;
+                  padding: 0.25rem 0.65rem;
+                  border-radius: 100px;
+                  display: flex;
+                  align-items: center;
+                  gap: 0.35rem;
+                  z-index: 2;
+                  backdrop-filter: blur(4px);
+                "
+              >
+                <span
+                  style="
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                    background: #f5c518;
+                    animation: p 2s infinite;
+                    display: inline-block;
+                  "
+                ></span>
+                Coming Soon
+              </div>
+              <div class="pthumb t2" style="filter: grayscale(0.2)">
+                Gestionale 2D<br />
+                <span style="font-size: 0.72rem; opacity: 0.5; font-weight: 500"
+                  >SaaS per PMI</span
+                >
+              </div>
+              <div class="pinfo">
+                <div class="ptag">Prodotto software · applicazione web</div>
+                <div class="pname">Gestionale magazzino 2D</div>
+                <div class="pnote">
+                  Progetto software orientato alla gestione visiva del
+                  magazzino. Lo mostro come esempio del mio lato più tecnico e
+                  progettuale.
+                </div>
+              </div>
+            </div>
+
+            <div class="pcard" style="position: relative">
+              <div
+                style="
+                  position: absolute;
+                  top: 0.75rem;
+                  right: 0.75rem;
+                  background: rgba(0, 0, 0, 0.65);
+                  color: #fff;
+                  font-size: 0.62rem;
+                  font-weight: 700;
+                  letter-spacing: 0.1em;
+                  text-transform: uppercase;
+                  padding: 0.25rem 0.65rem;
+                  border-radius: 100px;
+                  display: flex;
+                  align-items: center;
+                  gap: 0.35rem;
+                  z-index: 2;
+                  backdrop-filter: blur(4px);
+                "
+              >
+                <span
+                  style="
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                    background: #f5c518;
+                    animation: p 2s infinite;
+                    display: inline-block;
+                  "
+                ></span>
+                Coming Soon
+              </div>
+              <div class="pthumb" style="background: #fff5f0; color: #8b3a1a">
+                Narravitae<br />
+                <span style="font-size: 0.72rem; opacity: 0.5; font-weight: 500"
+                  >Sito web</span
+                >
+              </div>
+              <div class="pinfo">
+                <div class="ptag">Sito professionale · identità digitale</div>
+                <div class="pname">Narravitae</div>
+                <div class="pnote">
+                  Struttura del sito e impostazione del messaggio per una
+                  presenza più coerente e professionale.
+                </div>
+              </div>
+            </div>
+
+            <div class="pcard" style="position: relative">
+              <div
+                style="
+                  position: absolute;
+                  top: 0.75rem;
+                  right: 0.75rem;
+                  background: rgba(0, 0, 0, 0.65);
+                  color: #fff;
+                  font-size: 0.62rem;
+                  font-weight: 700;
+                  letter-spacing: 0.1em;
+                  text-transform: uppercase;
+                  padding: 0.25rem 0.65rem;
+                  border-radius: 100px;
+                  display: flex;
+                  align-items: center;
+                  gap: 0.35rem;
+                  z-index: 2;
+                  backdrop-filter: blur(4px);
+                "
+              >
+                <span
+                  style="
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                    background: #f5c518;
+                    animation: p 2s infinite;
+                    display: inline-block;
+                  "
+                ></span>
+                Coming Soon
+              </div>
+              <div class="pthumb" style="background: #f0f4ff; color: #2d4da0">
+                PressPulse<br />
+                <span style="font-size: 0.72rem; opacity: 0.5; font-weight: 500"
+                  >Tool di rassegna stampa</span
+                >
+              </div>
+              <div class="pinfo">
+                <div class="ptag">Media monitoring · tool concept</div>
+                <div class="pname">PressPulse</div>
+                <div class="pnote">
+                  Concept di tool per rassegna stampa automatizzata, pensato per
+                  raccogliere risultati, organizzarli e facilitare il
+                  monitoraggio media.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            class="carousel-arrow right"
+            type="button"
+            aria-label="Progetto successivo"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </button>
+
+          <div class="carousel-counter">
+            <span class="current">1</span> / <span class="total">3</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1430,84 +1743,120 @@
         role="tabpanel"
         aria-labelledby="pricing-tab-new"
       >
-        <div class="plans">
-          <div class="plan hot" style="display: flex; flex-direction: column">
-            <div class="plan-badge">Ideale per iniziare</div>
-            <div class="plan-name">Starter</div>
-
-            <div
-              style="
-                font-size: 0.95rem;
-                color: var(--muted);
-                text-decoration: line-through;
-                margin-bottom: 0.2rem;
-              "
+        <div class="mobile-carousel" data-carousel="pricing-new">
+          <button
+            class="carousel-arrow left"
+            type="button"
+            aria-label="Prezzo precedente"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             >
-              390€
+              <path d="M15 18l-6-6 6-6"></path>
+            </svg>
+          </button>
+
+          <div class="plans">
+            <div class="plan hot" style="display: flex; flex-direction: column">
+              <div class="plan-badge">Ideale per iniziare</div>
+              <div class="plan-name">Starter</div>
+
+              <div
+                style="
+                  font-size: 0.95rem;
+                  color: var(--muted);
+                  text-decoration: line-through;
+                  margin-bottom: 0.2rem;
+                "
+              >
+                390€
+              </div>
+              <div class="plan-p">200€</div>
+
+              <div class="plan-cadence">prezzo lancio</div>
+              <div class="plan-note">
+                valido per alcune attività locali selezionate
+              </div>
+
+              <div class="feat">Sito one-page mobile-first</div>
+              <div class="feat">Struttura chiara dei contenuti</div>
+              <div class="feat">WhatsApp + form contatto</div>
+              <div class="feat">Base SEO tecnica</div>
+              <div class="feat">Consegna rapida</div>
+
+              <a href="#contatti" class="plan-cta dark" style="margin-top: auto"
+                >Parti da qui →</a
+              >
             </div>
-            <div class="plan-p">200€</div>
 
-            <div class="plan-cadence">prezzo lancio</div>
-            <div class="plan-note">
-              valido per alcune attività locali selezionate
+            <div class="plan" style="display: flex; flex-direction: column">
+              <div class="plan-name">Presenza Locale</div>
+              <div class="plan-p">690€</div>
+              <div class="plan-cadence">una tantum</div>
+              <div class="plan-note">
+                Per chi vuole un sito più completo e una presenza più ordinata.
+              </div>
+
+              <div class="feat">Sito multi-pagina</div>
+              <div class="feat">Revisione Google Business</div>
+              <div class="feat">Contatti e servizi più completi</div>
+              <div class="feat">Supporto al lancio</div>
+              <div class="feat">Impostazione più solida nel tempo</div>
+
+              <a
+                href="#contatti"
+                class="plan-cta outline"
+                style="margin-top: auto"
+                >Valutiamo se ti serve →</a
+              >
             </div>
 
-            <div class="feat">Sito one-page mobile-first</div>
-            <div class="feat">Struttura chiara dei contenuti</div>
-            <div class="feat">WhatsApp + form contatto</div>
-            <div class="feat">Base SEO tecnica</div>
-            <div class="feat">Consegna rapida</div>
+            <div class="plan" style="display: flex; flex-direction: column">
+              <div class="plan-name">Custom</div>
+              <div class="plan-p" style="font-size: 2rem; line-height: 1.2">
+                Su<br />misura
+              </div>
+              <div class="plan-cadence">preventivo</div>
+              <div class="plan-note">
+                Solo per esigenze reali: niente upsell forzato.
+              </div>
 
-            <a href="#contatti" class="plan-cta dark" style="margin-top: auto"
-              >Parti da qui →</a
-            >
+              <div class="feat">E-commerce</div>
+              <div class="feat">Prenotazioni / aree riservate</div>
+              <div class="feat">Applicazioni web</div>
+              <div class="feat">Automazioni dedicate</div>
+              <div class="feat">Analisi tecnica iniziale</div>
+
+              <a
+                href="#contatti"
+                class="plan-cta outline"
+                style="margin-top: auto"
+                >Parliamone →</a
+              >
+            </div>
           </div>
 
-          <div class="plan" style="display: flex; flex-direction: column">
-            <div class="plan-name">Presenza Locale</div>
-            <div class="plan-p">690€</div>
-            <div class="plan-cadence">una tantum</div>
-            <div class="plan-note">
-              Per chi vuole un sito più completo e una presenza più ordinata.
-            </div>
-
-            <div class="feat">Sito multi-pagina</div>
-            <div class="feat">Revisione Google Business</div>
-            <div class="feat">Contatti e servizi più completi</div>
-            <div class="feat">Supporto al lancio</div>
-            <div class="feat">Impostazione più solida nel tempo</div>
-
-            <a
-              href="#contatti"
-              class="plan-cta outline"
-              style="margin-top: auto"
-              >Valutiamo se ti serve →</a
+          <button
+            class="carousel-arrow right"
+            type="button"
+            aria-label="Prezzo successivo"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             >
-          </div>
-
-          <div class="plan" style="display: flex; flex-direction: column">
-            <div class="plan-name">Custom</div>
-            <div class="plan-p" style="font-size: 2rem; line-height: 1.2">
-              Su<br />misura
-            </div>
-            <div class="plan-cadence">preventivo</div>
-            <div class="plan-note">
-              Solo per esigenze reali: niente upsell forzato.
-            </div>
-
-            <div class="feat">E-commerce</div>
-            <div class="feat">Prenotazioni / aree riservate</div>
-            <div class="feat">Applicazioni web</div>
-            <div class="feat">Automazioni dedicate</div>
-            <div class="feat">Analisi tecnica iniziale</div>
-
-            <a
-              href="#contatti"
-              class="plan-cta outline"
-              style="margin-top: auto"
-              >Parliamone →</a
-            >
-          </div>
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </button>
         </div>
       </div>
 
@@ -1517,75 +1866,111 @@
         role="tabpanel"
         aria-labelledby="pricing-tab-existing"
       >
-        <div class="plans">
-          <div class="plan hot" style="display: flex; flex-direction: column">
-            <div class="plan-badge">Più richiesto</div>
-            <div class="plan-name">Aggiornamento</div>
-            <div class="plan-p">150€</div>
-            <div class="plan-cadence">da</div>
-            <div class="plan-note">
-              Per siti già esistenti che hanno bisogno di modifiche, contenuti
-              aggiornati o sistemazioni mirate.
+        <div class="mobile-carousel" data-carousel="pricing-existing">
+          <button
+            class="carousel-arrow left"
+            type="button"
+            aria-label="Prezzo precedente"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M15 18l-6-6 6-6"></path>
+            </svg>
+          </button>
+
+          <div class="plans">
+            <div class="plan hot" style="display: flex; flex-direction: column">
+              <div class="plan-badge">Più richiesto</div>
+              <div class="plan-name">Aggiornamento</div>
+              <div class="plan-p">150€</div>
+              <div class="plan-cadence">da</div>
+              <div class="plan-note">
+                Per siti già esistenti che hanno bisogno di modifiche, contenuti
+                aggiornati o sistemazioni mirate.
+              </div>
+
+              <div class="feat">Aggiornamento testi e immagini</div>
+              <div class="feat">Contatti, orari, servizi e pagine</div>
+              <div class="feat">Piccole correzioni layout</div>
+              <div class="feat">Intervento rapido e definito</div>
+
+              <a href="#contatti" class="plan-cta dark" style="margin-top: auto"
+                >Chiedi una valutazione →</a
+              >
             </div>
 
-            <div class="feat">Aggiornamento testi e immagini</div>
-            <div class="feat">Contatti, orari, servizi e pagine</div>
-            <div class="feat">Piccole correzioni layout</div>
-            <div class="feat">Intervento rapido e definito</div>
+            <div class="plan" style="display: flex; flex-direction: column">
+              <div class="plan-name">Manutenzione</div>
+              <div class="plan-p">60€</div>
+              <div class="plan-cadence">al mese</div>
+              <div class="plan-note">
+                Per mantenere il sito funzionante nel tempo. Non include
+                contenuti, creatività, SEO o nuove funzionalità.
+              </div>
 
-            <a href="#contatti" class="plan-cta dark" style="margin-top: auto"
-              >Chiedi una valutazione →</a
-            >
+              <div class="feat">Verifica periodica operatività sito</div>
+              <div class="feat">
+                Controllo moduli contatto e funzioni essenziali
+              </div>
+              <div class="feat">Gestione piccoli problemi tecnici</div>
+              <div class="feat">Supporto di primo livello</div>
+              <div class="feat">Tempi di risposta definiti</div>
+
+              <a
+                href="#contatti"
+                class="plan-cta outline"
+                style="margin-top: auto"
+                >Vediamo se ti serve →</a
+              >
+            </div>
+
+            <div class="plan" style="display: flex; flex-direction: column">
+              <div class="plan-name">Custom</div>
+              <div class="plan-p" style="font-size: 2rem; line-height: 1.2">
+                Su<br />misura
+              </div>
+              <div class="plan-cadence">preventivo</div>
+              <div class="plan-note">
+                Per esigenze particolari su siti già esistenti: modifiche più
+                ampie, funzionalità dedicate o interventi non standard.
+              </div>
+
+              <div class="feat">Interventi personalizzati</div>
+              <div class="feat">Funzionalità o sezioni dedicate</div>
+              <div class="feat">Analisi del sito attuale</div>
+              <div class="feat">Preventivo chiaro prima di iniziare</div>
+
+              <a
+                href="#contatti"
+                class="plan-cta outline"
+                style="margin-top: auto"
+                >Parliamone →</a
+              >
+            </div>
           </div>
 
-          <div class="plan" style="display: flex; flex-direction: column">
-            <div class="plan-name">Manutenzione</div>
-            <div class="plan-p">50€</div>
-            <div class="plan-cadence">al mese</div>
-            <div class="plan-note">
-              Per mantenere il sito funzionante nel tempo. Non include
-              contenuti, creatività, SEO o nuove funzionalità.
-            </div>
-
-            <div class="feat">Verifica periodica operatività sito</div>
-            <div class="feat">
-              Controllo moduli contatto e funzioni essenziali
-            </div>
-            <div class="feat">Gestione piccoli problemi tecnici</div>
-            <div class="feat">Supporto di primo livello</div>
-            <div class="feat">Tempi di risposta definiti</div>
-
-            <a
-              href="#contatti"
-              class="plan-cta outline"
-              style="margin-top: auto"
-              >Vediamo se ti serve →</a
+          <button
+            class="carousel-arrow right"
+            type="button"
+            aria-label="Prezzo successivo"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             >
-          </div>
-
-          <div class="plan" style="display: flex; flex-direction: column">
-            <div class="plan-name">Custom</div>
-            <div class="plan-p" style="font-size: 2rem; line-height: 1.2">
-              Su<br />misura
-            </div>
-            <div class="plan-cadence">preventivo</div>
-            <div class="plan-note">
-              Per esigenze particolari su siti già esistenti: modifiche più
-              ampie, funzionalità dedicate o interventi non standard.
-            </div>
-
-            <div class="feat">Interventi personalizzati</div>
-            <div class="feat">Funzionalità o sezioni dedicate</div>
-            <div class="feat">Analisi del sito attuale</div>
-            <div class="feat">Preventivo chiaro prima di iniziare</div>
-
-            <a
-              href="#contatti"
-              class="plan-cta outline"
-              style="margin-top: auto"
-              >Parliamone →</a
-            >
-          </div>
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </button>
         </div>
       </div>
     </div>
@@ -1752,8 +2137,126 @@
 
           const targetPanel = document.getElementById(targetId);
           targetPanel.classList.add("is-active");
+
+          requestAnimationFrame(initOrRefreshCarousels);
         });
       });
+
+      const portfolioTabs = document.querySelectorAll(".portfolio-tab");
+      const portfolioPanels = document.querySelectorAll(".portfolio-panel");
+
+      portfolioTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const targetId = tab.getAttribute("aria-controls");
+
+          portfolioTabs.forEach((t) => {
+            t.classList.remove("is-active");
+            t.setAttribute("aria-selected", "false");
+          });
+
+          portfolioPanels.forEach((panel) => {
+            panel.classList.remove("is-active");
+          });
+
+          tab.classList.add("is-active");
+          tab.setAttribute("aria-selected", "true");
+
+          const targetPanel = document.getElementById(targetId);
+          targetPanel.classList.add("is-active");
+
+          requestAnimationFrame(initOrRefreshCarousels);
+        });
+      });
+
+      function setupCarousel(carousel) {
+        const track =
+          carousel.querySelector(".steps") ||
+          carousel.querySelector(".plans") ||
+          carousel.querySelector(".port-grid");
+
+        if (!track) return;
+
+        const items = Array.from(track.children);
+        const prevBtn = carousel.querySelector(".carousel-arrow.left");
+        const nextBtn = carousel.querySelector(".carousel-arrow.right");
+        const counter = carousel.querySelector(".carousel-counter");
+        const currentEl = counter ? counter.querySelector(".current") : null;
+        const totalEl = counter ? counter.querySelector(".total") : null;
+
+        if (totalEl) totalEl.textContent = items.length;
+
+        function getActiveIndex() {
+          const trackLeft = track.getBoundingClientRect().left;
+          let bestIndex = 0;
+          let bestDistance = Infinity;
+
+          items.forEach((item, index) => {
+            const distance = Math.abs(
+              item.getBoundingClientRect().left - trackLeft,
+            );
+            if (distance < bestDistance) {
+              bestDistance = distance;
+              bestIndex = index;
+            }
+          });
+
+          return bestIndex;
+        }
+
+        function updateUI() {
+          const index = getActiveIndex();
+          const maxScrollLeft = track.scrollWidth - track.clientWidth - 2;
+
+          if (currentEl) currentEl.textContent = index + 1;
+          if (prevBtn)
+            prevBtn.classList.toggle("is-disabled", track.scrollLeft <= 4);
+          if (nextBtn)
+            nextBtn.classList.toggle(
+              "is-disabled",
+              track.scrollLeft >= maxScrollLeft,
+            );
+        }
+
+        function scrollToIndex(targetIndex) {
+          const clamped = Math.max(0, Math.min(items.length - 1, targetIndex));
+          const item = items[clamped];
+          track.scrollTo({
+            left: item.offsetLeft - 4,
+            behavior: "smooth",
+          });
+        }
+
+        if (!carousel.dataset.bound) {
+          if (prevBtn) {
+            prevBtn.addEventListener("click", () => {
+              scrollToIndex(getActiveIndex() - 1);
+            });
+          }
+          if (nextBtn) {
+            nextBtn.addEventListener("click", () => {
+              scrollToIndex(getActiveIndex() + 1);
+            });
+          }
+
+          let scrollTimeout;
+          track.addEventListener("scroll", () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(updateUI, 40);
+          });
+
+          window.addEventListener("resize", updateUI);
+          carousel.dataset.bound = "true";
+        }
+
+        updateUI();
+      }
+
+      function initOrRefreshCarousels() {
+        document.querySelectorAll(".mobile-carousel").forEach(setupCarousel);
+      }
+
+      document.addEventListener("DOMContentLoaded", initOrRefreshCarousels);
+      window.addEventListener("load", initOrRefreshCarousels);
     </script>
   </body>
 </html>
